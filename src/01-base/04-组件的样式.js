@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // 引入css,     webpack支持
-import "./css/01-index.css";
+import "./css/01-index.css"; 
 
 export default class App extends Component {
   render() {
