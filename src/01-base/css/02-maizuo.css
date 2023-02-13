@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  background-color: rgb(236, 244, 240);
+  /* 去掉li的样式 */
+  list-style: none;
+  display: flex;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+}
+ul li {
+  flex: 1;
+  text-align: center;
+}
+
+.active {
+  color: rgb(249, 13, 44);
+}
+
+/* 影院组件： */
+.all-page {
+  background-color: rgb(236, 244, 240);
+}
+dl {
+  border-bottom: 1px solid black;
+  line-height: 30px;
+}
+dl dd {
+  font-size: 18px;
+}
+dl dt {
+  font-size: 14px;
+}
+input{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 99%;
+  height: 40px;
+  font-size: 20px;
+}
