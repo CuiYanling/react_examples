@@ -3,31 +3,43 @@ import "./css/10-条件渲染.css";
 
 export default class App extends Component {
   // 防止重名，写成了变量，变量不允许重名
-  mytext2 = React.createRef();
+  //   mytext2 = React.createRef();
   // 初始数据：
   state = {
+    mytext: "",
     list: [
       {
         id: 1,
         mytext2: "aaa",
+        ischecked: false,
       },
       {
         id: 2,
         mytext2: "bbb",
+        ischecked: true,
       },
       {
         id: 3,
         mytext2: "ccc",
+        ischecked: false,
       },
     ],
   };
   render() {
     return (
       <div>
-        <input ref={this.mytext2}></input>
+        {/* <input ref={this.mytext2}></input> */}
+        <input
+          value={this.state.mytext}
+          onChange={(event) => {
+            this.setState({
+              mytext: event.target.value,
+            });
+          }}
+        ></input>
         <button
           onClick={() => {
-            console.log("数据", this.mytext2.current.value);
+            // console.log("数据", this.mytext2.current.value);
             // 此函数中的this指向与外部render中的this指向相同
             // 点击按钮，增加数据，修改list数组(直接修改状态了)
             // 不要直接修改状态！！！
@@ -37,14 +49,16 @@ export default class App extends Component {
             newlist.push({
               // 生成不同id的函数
               id: Math.random() * 1000,
-              mytext2: this.mytext2.current.value,
+              mytext2: this.state.mytext,
+              ischecked: false,
             });
             // 修改视图
             this.setState({
               list: newlist,
+              mytext: "",
             });
             //   添加进去新元素后，清空input框
-            this.mytext2.current.value = "";
+            // this.mytext2.current.value = "";
           }}
         >
           add
@@ -52,7 +66,17 @@ export default class App extends Component {
         <ul>
           {this.state.list.map((item, index) => (
             <li key={item.id}>
-              {item.mytext2}
+              <input
+                type="checkbox"
+                checked={item.ischecked}
+                onChange={() => this.handleChange(index)}
+              ></input>
+              {/* 文字的HTML样式：下划线 */}
+              <span
+                style={{ textDecoration: item.ischecked ? "line-through" : "" }}
+              >
+                {item.mytext2}
+              </span>
               {/* 事件绑定 */}
               {/* <button onClick={this.handleDelete.bind(this, index)}>del</button> */}
               <button
@@ -74,10 +98,22 @@ export default class App extends Component {
         {/* 条件渲染是创建删除？还是显示隐藏？——————动态~创建删除 */}
 
         {/* 如果想要是显示+隐藏，就要使用className,例如：（一开始就存在改节点 */}
-        <div className={this.state.list.length === 0 ? "" : "hidden"}>空空如也</div>
+        <div className={this.state.list.length === 0 ? "" : "hidden"}>
+          空空如也
+        </div>
       </div>
     );
   }
+  //点击复选框
+  handleChange = (index) => {
+    console.log(index);
+    // 不可以直接修改原数组
+    let newlist = { ...this.state.list };
+    newlist[index].ischecked = !newlist[index].ischecked;
+    this.setState({
+      newlist: newlist,
+    });
+  };
 
   //   删除按钮：
   handleDelete(index) {
