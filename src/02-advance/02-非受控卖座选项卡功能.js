@@ -5,14 +5,11 @@ import "./css/02-maizuo.css";
 import Film from "./maizuocomponent/Film";
 import Center from "./maizuocomponent/Center";
 import Cinema from "./maizuocomponent/Cinema";
+import Tabbar from "./maizuocomponent/Tabbar";
+import Navbar from "./maizuocomponent/Navbar";
 
 export default class App extends Component {
   state = {
-    list: [
-      { id: 1, text: "电影" },
-      { id: 2, text: "影院" },
-      { id: 3, text: "我的" },
-    ],
     current: 1,
   };
   // 组件渲染—————函数表达式
@@ -31,6 +28,14 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <Navbar
+          myevent={() => {
+            this.setState({
+              current: 3,
+            });
+          }}
+        ></Navbar>
+
         {/* 组件显示 方法1——————条件渲染 */}
         {/* {this.state.current === 1 && <Film></Film>}
         {this.state.current === 2 && <Cinema></Cinema>}
@@ -38,29 +43,14 @@ export default class App extends Component {
 
         {/* 组件显示 方法2——————函数表达式 */}
         {this.which()}
-
-        <ul>
-          {this.state.list.map((item) => (
-            <li
-              key={item.id}
-              className={this.state.current === item.id ? "active" : ""}
-              onClick={() => {
-                this.handleClick(item.id);
-              }}
-            >
-              {item.text}
-            </li>
-          ))}
-        </ul>
+        <Tabbar cylevent={this.handlechange}></Tabbar>
       </div>
     );
   }
-  // 点击事件
-  handleClick(id) {
-    console.log(id);
-    // 修改current的状态,重新渲染后，视图更改
+  handlechange = (index) => {
+    console.log(index);
     this.setState({
-      current: id,
+      current: index,
     });
-  }
+  };
 }
