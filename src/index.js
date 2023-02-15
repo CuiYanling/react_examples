@@ -3,7 +3,7 @@ import React from "react";
 // import ReactDOM  from "react-dom"
 import { createRoot } from "react-dom/client";
 // 引入 组件：
-import App from "./02-advance/02-非受控卖座选项卡功能";
+import App from "./02-advance/03-受控卖座选项卡功能";
 
 // render:（17以及以前）
 // ReactDOM.render('111',document.getElementById('root'))
