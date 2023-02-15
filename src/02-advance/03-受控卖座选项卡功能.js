@@ -10,6 +10,11 @@ import Navbar from "./maizuocomponent2/Navbar";
 
 export default class App extends Component {
   state = {
+    list: [
+      { id: 1, text: "电影" },
+      { id: 2, text: "影院" },
+      { id: 3, text: "我的" },
+    ],
     current: 1,
   };
   // 组件渲染—————函数表达式
@@ -43,14 +48,18 @@ export default class App extends Component {
 
         {/* 组件显示 方法2——————函数表达式 */}
         {this.which()}
-        <Tabbar cylevent={this.handlechange}></Tabbar>
+        <Tabbar
+          cylevent={this.handlechange}
+          list={this.state.list}
+          current={this.state.current}
+        ></Tabbar>
       </div>
     );
   }
-  handlechange = (index) => {
-    console.log(index);
+  handlechange = (id) => {
+    console.log(id);
     this.setState({
-      current: index,
+      current: id,
     });
   };
 }
