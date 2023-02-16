@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// 类~形式的组件
 export default class Tabbar extends Component {
   render() {
     return (
@@ -21,3 +22,26 @@ export default class Tabbar extends Component {
     );
   }
 }
+
+// 函数式~组件
+// const Tabbar = (props) => {
+//   console.log(props);
+//   return (
+//     <div>
+//       <ul>
+//         {props.list.map((item) => (
+//           <li
+//             key={item.id}
+//             className={props.current === item.id ? "active" : ""}
+//             onClick={() => {
+//               props.cylevent(item.id);
+//             }}
+//           >
+//             {item.text}
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
+// export default Tabbar;
