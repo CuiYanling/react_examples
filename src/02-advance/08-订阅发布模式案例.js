@@ -2,11 +2,29 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./css/03-filmList.css";
 
+// 调度中心
+var bus = {
+  list: [],
+  // 订阅
+  subscribe(callback) {
+    // console.log(callback);
+    // 存在list当中
+    this.list.push(callback);
+  },
+  // 发布
+  publish(text) {
+    // 遍历列表，执行回调函数
+    // console.log(this.list);
+    this.list.forEach((callback) => {
+      callback && callback(text);
+    });
+  },
+};
+
 // 父组件：
 export default class App extends Component {
   state = {
     filmList: [],
-    detailVlaue: "",
   };
   constructor() {
     super();
@@ -30,39 +48,29 @@ export default class App extends Component {
     return (
       <div>
         {this.state.filmList.map((item) => (
-          <FilmItem
-            key={item.filmId}
-            {...item}
-            cylevent={(value) => {
-              console.log(value);
-              this.setState({
-                detailVlaue: value,
-              });
-            }}
-          ></FilmItem>
+          <FilmItem key={item.filmId} {...item}></FilmItem>
         ))}
-        <FilmDetail detailVlaue={this.state.detailVlaue}></FilmDetail>
+        <FilmDetail></FilmDetail>
       </div>
     );
   }
 }
 
-// 受控组件：
+// 影片组件——受控组件：
 class FilmItem extends Component {
   render() {
     console.log(this.props);
     let { name, poster, nation, grade, synopsis } = this.props;
 
     return (
-      <div className="films">
-        <img
-          src={poster}
-          onClick={() => {
-            // console.log(synopsis);
-            this.props.cylevent(synopsis);
-          }}
-          alt=""
-        ></img>
+      <div
+        className="films"
+        onClick={() => {
+          //   console.log(synopsis);
+          bus.publish(synopsis);
+        }}
+      >
+        <img src={poster} alt=""></img>
         <h4>{name}</h4>
         <div>地区：{nation}</div>
         <div>观众评分：{grade}</div>
@@ -73,12 +81,22 @@ class FilmItem extends Component {
 
 // 影片细节组件
 class FilmDetail extends Component {
+  state = {
+    info: "",
+  };
+  constructor() {
+    super();
+    bus.subscribe((info) => {
+      //   console.log("细节组件", info);
+      this.setState({
+        info: info,
+      });
+    });
+  }
   render() {
-    // console.log(this.props);
-    let { detailVlaue } = this.props;
     return (
       <div className="filmDetail">
-        <h5>{detailVlaue}</h5>
+        <h5>{this.state.info}</h5>
       </div>
     );
   }
