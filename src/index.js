@@ -3,7 +3,7 @@ import React from "react";
 // import ReactDOM  from "react-dom"
 import { createRoot } from "react-dom/client";
 // 引入 组件：
-import App from "./02-advance/09-非父子组件通信-context";
+import App from "./02-advance/10-插槽";
 
 // render:（17以及以前）
 // ReactDOM.render('111',document.getElementById('root'))
