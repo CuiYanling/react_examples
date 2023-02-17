@@ -25,7 +25,7 @@ class Field extends Component {
 // 父组件：
 export default class App extends Component {
   state = {
-    // 在localStorage获取默认值:
+    // 在localStorage获取默认值2:
     username: localStorage.getItem("username"),
     password: localStorage.getItem("password"),
   };
