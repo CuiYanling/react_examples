@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 export default class App extends Component {
   render() {
-    // 上面父组件传来一个对象
+    // 父组件传来一个对象
     var obj = {
       title: "标题",
       leftshow: true,

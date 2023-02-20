@@ -23,7 +23,7 @@ export default class App extends Component {
         <button
           onClick={() => {
             this.setState({
-              myname: "xiaoming",
+              myname: "xiaocyr",
             });
           }}
         >
